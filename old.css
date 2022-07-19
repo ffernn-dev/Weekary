@@ -1,0 +1,196 @@
+:root {
+	/* BASE COLORS */
+	--background-1: #f7fff7;
+	--background-2: #fff;
+	--foreground: #1c1a1e;
+	--highlight: #e0a4c6;
+	--secondary: #EF476F;
+
+	/* TIMETABLE COLOURS */
+	--timetable-1: #1E3888;
+	--timetable-2: #47A8BD;
+	--timetable-3: #7FC6A4;
+	--timetable-4: #F5E663;
+	--timetable-5: #FFAD69;
+	--timetable-6: #9C3848;
+	--timetable-7: #D87CAC;
+	--timetable-8: #7D53DE;
+	--timetable-1-desat: #9aaac7;
+	--timetable-2-desat: #acdade;
+	--timetable-3-desat: #c4e7d3;
+	--timetable-4-desat: #f6f4b8;
+	--timetable-5-desat: #fadcba;
+	--timetable-6-desat: #d0aaac;
+	--timetable-7-desat: #eac7d7;
+	--timetable-8-desat: #c3b5ec;
+}
+
+/*******************************/
+/****** MAIN PAGE STYLING ******/
+/*******************************/
+html{
+	font-family: "Ubuntu", sans-serif;
+	background-color: var(--background-1);
+	color: var(--foreground);
+	letter-spacing: 0.1rem;
+	font-weight: 500;
+	transition: .15s ease;
+}
+
+body {
+	margin: 0 2rem;
+	line-height: 1.5;
+}
+
+h1,h2,h3 {
+	line-height: 1.2;
+	font-weight: 600;
+}
+
+.page-title {
+	text-align:center;
+	font-size: 4rem;
+	font-weight: 700;
+	margin: 1rem
+}
+
+hr {
+	background: transparent;
+	height: 1px;
+	border: none;
+	border-bottom: .1rem solid var(--foreground);
+}
+
+img {
+	max-width: 100%;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1rem;
+	flex-grow: 1;
+	flex-shrink: 1;
+	width: 25%;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.page-cover-image {
+	display: block;
+	-o-object-fit: cover;
+	   object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.widget{
+	width: 100%;
+	border: 0 
+}
+
+.url {
+	text-decoration: none;
+	color: var(--foreground);
+	position: relative;
+}
+
+.url::before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 0.15rem;
+	background-color: var(--secondary);
+	bottom: 0;
+	left: 0;
+	transform-origin: right;
+	transform: scaleX(0);
+	transition: transform .3s ease-in-out;
+}
+
+.url:hover::before {
+	transform-origin: left;
+	transform: scaleX(1);
+}
+
+.weekselector{
+	display: flex;
+}
+
+.tabbutton:first-child{
+	border-radius: .75rem 0 0 0;
+}
+.tabbutton:last-child{
+	border-radius: 0 .75rem 0 0;
+}
+
+.tabbutton{
+	border: .1rem solid var(--foreground);
+	background-color: transparent;
+	color: var(--foreground);
+	width: 50%;
+	height: 3rem;
+	cursor: pointer;
+}
+
+.tabbuttonselected{
+	background-color: var(--foreground);
+	color: var(--background-1);
+	border: none;
+	font-weight: 700;
+}
+
+/*******************************/
+/********** TIMETABLE **********/
+/*******************************/
+.timetable{
+	border: .1rem solid var(--foreground);
+	border-top: 0;
+	border-radius: 0 0 .75rem .75rem;
+	width: 22rem;
+	text-align: left;
+	max-width: 22rem;
+}
+
+.timetableitem{
+	padding: .75rem;
+}
+
+.breakspacer{
+	height: 2rem;
+}
+
+#period6{
+	border-radius: 0 0 .75rem .75rem;
+}
+
+.classname{
+	margin: 0;
+}
+
+.classroom{
+	margin: 0;
+	font-size: 80%
+}

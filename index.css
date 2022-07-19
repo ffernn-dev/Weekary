@@ -1,0 +1,67 @@
+:root {
+	/* BASE COLORS */
+	--background-1: #f7fff7;
+	--background-2: #fff;
+	--foreground: #1c1a1e;
+	--highlight: #e0a4c6;
+	--secondary: #EF476F;
+
+	/* TIMETABLE COLOURS */
+	--timetable-1: #1E3888;
+	--timetable-2: #47A8BD;
+	--timetable-3: #7FC6A4;
+	--timetable-4: #F5E663;
+	--timetable-5: #FFAD69;
+	--timetable-6: #9C3848;
+	--timetable-7: #D87CAC;
+	--timetable-8: #7D53DE;
+	--timetable-1-desat: #9aaac7;
+	--timetable-2-desat: #acdade;
+	--timetable-3-desat: #c4e7d3;
+	--timetable-4-desat: #f6f4b8;
+	--timetable-5-desat: #fadcba;
+	--timetable-6-desat: #d0aaac;
+	--timetable-7-desat: #eac7d7;
+	--timetable-8-desat: #c3b5ec;
+}
+
+html{
+	font-family: "Ubuntu", sans-serif;
+	background-color: var(--background-1);
+	color: var(--foreground);
+	letter-spacing: 0.1rem;
+	font-weight: 500;
+	transition: .15s ease;
+}
+
+body {
+	margin: .75rem .75rem;
+	line-height: 1.5;
+}
+
+.container { 
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr;
+	gap: 2px 2px;
+	background-color: var(--foreground);
+	grid-auto-flow: row;
+	grid-template-areas:
+		"mon tue wed thu fri sat sun";
+}
+
+#mon { grid-area: mon; }
+#tue { grid-area: tue; }
+#wed { grid-area: wed; }
+#thu { grid-area: thu; }
+#fri { grid-area: fri; }
+#sat { grid-area: sat; }
+#sun { grid-area: sun; }
+
+.dayname {
+	background-color: var(--background-1);
+	text-align: center;
+	font-weight: bold;
+	height: 2rem;
+	line-height: 2rem;
+}
