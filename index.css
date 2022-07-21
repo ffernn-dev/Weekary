@@ -41,6 +41,14 @@ body {
 	height: 100%;
 }
 
+::-moz-selection {
+	background: var(--highlight);
+}
+
+::selection {
+	background: var(--highlight);
+}
+
 .container { 
 	height: 100%;
 	padding: 1px;
