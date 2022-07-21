@@ -3,59 +3,56 @@
     <head>
         <link rel="stylesheet" type="text/css" href="index.css">
         <script>
-            document.addEventListener("keypress", function(e) {
-                if (e.keyCode === 13) {
-                    var cells = document.querySelectorAll("[contenteditable=true]")
-                    var currentindex = Array.prototype.indexOf.call(cells, e.target)
-                    if (currentindex != cells.length - 1){
-                        cells[currentindex + 1].focus()
-                    }
-                    else{
-                        cells[0].focus()
-                    }
-
-                    e.preventDefault()
-                }
-            });
-            
-            var colourbuttonelements = document.getElementsByClassName("coloursquare");
+            var colourbuttonelements
             var picker
 
             function colourPick(e){
-                console.log("Colour picker opening")
-                e.target.innerHTML = "<div class=\"colourpicker\"><div class=\"colourpickerarrow\"></div>The</div>"
-                picker = e.target.firstChild;
+                //e.target.innerHTML = "<div class=\"colourpicker\"><div class=\"colourpickerarrow\"></div>The</div>"
+                e.target.appendChild(picker)
+                picker.style = "display: flex;"
             };
 
-            function hidePicker() {
-                console.log("Colour picker closing")
-                picker.remove();
+            function setColour(element, number){
+                element.closest('.cell').style = "background-color: var(--timetable-" + number + "-desat);";
             }
 
             window.onload= function(){
+                colourbuttonelements = document.getElementsByClassName("coloursquare");
+                picker = document.getElementById("colourpicker")
+                
                 for (var i = 0; i < colourbuttonelements.length; i++) {
                     colourbuttonelements[i].addEventListener('click', function(e) {
-                        colourPick(e)
+                        if(e.target.classList.contains("coloursquare")) {
+                            colourPick(e)
+                        }
                     });
-                    // colourbuttonelements[i].addEventListener('mouseleave', function(e) {
-                    //     hidePicker(e)
-                    // });
                 }
+
+                document.addEventListener("keypress", function(e) {
+                    if (e.keyCode === 13) {
+                        var cells = document.querySelectorAll("[contenteditable=true]")
+                        var currentindex = Array.prototype.indexOf.call(cells, e.target)
+
+                        if (currentindex != cells.length - 1){cells[currentindex + 1].focus()}
+                        else{cells[0].focus()}
+                        e.preventDefault()
+                    }
+                });
             }
         </script>
     </head>
     <body>
-        <div class="colourpicker" style="left:100px;">
+        <div id="colourpicker" class="colourpicker" style="display:none;">
             <div class="colourpickerarrow"></div>
             <div class="colourpickerinner">
-                <button class="colourpickerbutton" style="background-color: var(--timetable-1);"></button>
-                <button class="colourpickerbutton" style="background-color: var(--timetable-2);"></button>
-                <button class="colourpickerbutton" style="background-color: var(--timetable-3);"></button>
-                <button class="colourpickerbutton" style="background-color: var(--timetable-4);"></button>
-                <button class="colourpickerbutton" style="background-color: var(--timetable-5);"></button>
-                <button class="colourpickerbutton" style="background-color: var(--timetable-6);"></button>
-                <button class="colourpickerbutton" style="background-color: var(--timetable-7);"></button>
-                <button class="colourpickerbutton" style="background-color: var(--timetable-8);"></button>
+                <button class="colourpickerbutton" onclick="setColour(this,1)" style="background-color: var(--timetable-1);"></button>
+                <button class="colourpickerbutton" onclick="setColour(this,2)" style="background-color: var(--timetable-2);"></button>
+                <button class="colourpickerbutton" onclick="setColour(this,3)" style="background-color: var(--timetable-3);"></button>
+                <button class="colourpickerbutton" onclick="setColour(this,4)" style="background-color: var(--timetable-4);"></button>
+                <button class="colourpickerbutton" onclick="setColour(this,5)" style="background-color: var(--timetable-5);"></button>
+                <button class="colourpickerbutton" onclick="setColour(this,6)" style="background-color: var(--timetable-6);"></button>
+                <button class="colourpickerbutton" onclick="setColour(this,7)" style="background-color: var(--timetable-7);"></button>
+                <button class="colourpickerbutton" onclick="setColour(this,8)" style="background-color: var(--timetable-8);"></button>
             </div>
         </div>
         <div class="container">

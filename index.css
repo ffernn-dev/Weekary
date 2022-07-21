@@ -7,22 +7,22 @@
 	--secondary: #EF476F;
 
 	/* TIMETABLE COLOURS */
-	--timetable-1: #1E3888;
-	--timetable-2: #47A8BD;
-	--timetable-3: #7FC6A4;
-	--timetable-4: #F5E663;
-	--timetable-5: #FFAD69;
-	--timetable-6: #9C3848;
-	--timetable-7: #D87CAC;
-	--timetable-8: #7D53DE;
-	--timetable-1-desat: #9aaac7;
-	--timetable-2-desat: #acdade;
-	--timetable-3-desat: #c4e7d3;
-	--timetable-4-desat: #f6f4b8;
-	--timetable-5-desat: #fadcba;
-	--timetable-6-desat: #d0aaac;
-	--timetable-7-desat: #eac7d7;
-	--timetable-8-desat: #c3b5ec;
+	--timetable-1: #9C3848;
+	--timetable-2: #FFAD69;
+	--timetable-3: #F5E663;
+	--timetable-4: #7FC6A4;
+	--timetable-5: #47A8BD;
+	--timetable-6: #1E3888;
+	--timetable-7: #7D53DE;
+	--timetable-8: #D87CAC;
+	--timetable-1-desat: #d0aaac;
+	--timetable-2-desat: #fadcba;
+	--timetable-3-desat: #f6f4b8;
+	--timetable-4-desat: #c4e7d3;
+	--timetable-5-desat: #acdade;
+	--timetable-6-desat: #9aaac7;
+	--timetable-7-desat: #c3b5ec;
+	--timetable-8-desat: #eac7d7;
 }
 
 html{
@@ -32,6 +32,7 @@ html{
 	letter-spacing: 0.1rem;
 	font-weight: 500;
 	transition: .15s ease;
+	caret-color: var(--foreground);
 }
 
 body {
@@ -149,7 +150,7 @@ body {
 	align-items:center;
 }
 
-.cell:hover > .colourbutton {
+.cell:hover .colourbutton {
 	display: flex;
 }
 
@@ -157,17 +158,16 @@ body {
 	cursor: pointer;
 	width: 14px;
 	height: 14px;
-	/* background-color: #c3b5ec; */
-	background: conic-gradient(hsl(360, 100%, 70%), 
-								hsl(320, 100%, 70%),
-								hsl(280, 100%, 70%),
-								hsl(240, 100%, 70%),
-								hsl(200, 100%, 70%),
-								hsl(160, 100%, 70%),
-								hsl(120, 100%, 70%),
-								hsl(80, 100%, 70%),
-								hsl(40, 100%, 70%),
-								hsl(0, 100%, 70%));
+	background: conic-gradient(hsl(360, 100%, 75%), 
+								hsl(320, 100%, 75%),
+								hsl(280, 100%, 75%),
+								hsl(240, 100%, 75%),
+								hsl(200, 100%, 75%),
+								hsl(160, 100%, 75%),
+								hsl(120, 100%, 75%),
+								hsl(80, 100%, 75%),
+								hsl(40, 100%, 75%),
+								hsl(0, 100%, 75%));
 	border-radius: 100%;
 	border: 1px solid var(--foreground);
 }
@@ -182,11 +182,10 @@ body {
 	padding: .75rem;
 	/* Weird positioning stuff */
 	z-index: 100;
-	right: calc(64px + 7px);
 	width: 128px;
-	height: 64px;
+	right: calc(64px + 7px);
 	margin-top: calc(15px + 18px);
-	/* center the inner */
+	/* center the inner contents */
 	display: flex;
 	justify-content: center;
 	align-items: center;
