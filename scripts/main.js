@@ -1,6 +1,8 @@
 var colourbuttonelements;
 var picker;
 var savetimeout;
+var cells;
+var statustext;
 
 var times = ["07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"]
 
@@ -18,9 +20,20 @@ function setColour(number){ //sets the colour of the cell when button is pressed
 	};
 };
 
+function saveCurrentState() {
+	var content = []
+	localStorage.setItem("times", JSON.stringify(times));
+	for(i = 0; i < cells.length; i++) {
+		content.push(cells[i].innerText)
+	}
+	localStorage.setItem("content", JSON.stringify(content))
+	statustext.innerText = "Saved!"
+}
+
 
 window.onload = function(){
 	var timetable = document.getElementById("timetable")
+
 	for (var i = 0; i < times.length; i++) {
 		const row = document.createElement("div");
 		row.classList.add("row")
@@ -56,9 +69,10 @@ window.onload = function(){
 		timetable.appendChild(row)
 	}
 
-	var cells = document.querySelectorAll("[contenteditable=true]");
+	cells = document.querySelectorAll("[contenteditable=true]");
 	colourbuttonelements = document.getElementsByClassName("coloursquare");
 	picker = document.getElementById("colourpicker");
+	statustext = document.getElementById("status")
 	
 	for (var i = 0; i < colourbuttonelements.length; i++) {
 		colourbuttonelements[i].addEventListener('click', function(e) {
@@ -69,7 +83,7 @@ window.onload = function(){
 	};
 
 	document.addEventListener("keydown", function(e) {
-		if (e.key === "Enter") {
+		if (e.fkey === "Enter") {
 			var currentindex = Array.prototype.indexOf.call(cells, e.target); //index of the current cell in the cell array
 
 			if (currentindex != cells.length - 1){cells[currentindex + 1].focus()} //if the cell isn't the last one, move to the next cell
@@ -92,9 +106,11 @@ window.onload = function(){
 	for (var i = 0; i < cells.length; i++) {
 		cells[i].addEventListener('keyup', function (e) {
 			clearTimeout(savetimeout); //clear the timeout, so it doesn't trigger before 1 second has elapsed after the last keyup
+			statustext.innerText = "Idle..."
 
 			savetimeout = setTimeout(function () {
-				console.log('Saved');
+				statustext.innerText = "Saving..."
+				saveCurrentState()
 			}, 1000); 
 		});
 	};

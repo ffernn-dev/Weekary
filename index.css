@@ -25,6 +25,8 @@
 	--timetable-8-desat: #eac7d7;
 }
 
+
+/* BASE STYLING */
 html{
 	font-family: "Ubuntu", sans-serif;
 	background-color: var(--background-1);
@@ -50,6 +52,8 @@ body {
 	background: var(--highlight);
 }
 
+
+/* TIMETABLE LAYOUT */
 .timetable {
 	background-color: var(--foreground);
 	padding: 1px;
@@ -78,6 +82,8 @@ body {
 		'cell0 cell1 cell2 cell3 cell4 cell5 cell6 cell7';
 }
 
+
+/* CELL STYLING */
 .cell {
 	background-color: var(--background-1);
 	padding: .5rem;
@@ -106,6 +112,8 @@ body {
 	text-align: left;
 }
 
+
+/* COLOUR PICKER */
 .colourbutton{
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 8px;
 	position: absolute;
@@ -129,16 +137,7 @@ body {
 	cursor: pointer;
 	width: 14px;
 	height: 14px;
-	background: conic-gradient(hsl(360, 100%, 75%), 
-								hsl(320, 100%, 75%),
-								hsl(280, 100%, 75%),
-								hsl(240, 100%, 75%),
-								hsl(200, 100%, 75%),
-								hsl(160, 100%, 75%),
-								hsl(120, 100%, 75%),
-								hsl(80, 100%, 75%),
-								hsl(40, 100%, 75%),
-								hsl(0, 100%, 75%));
+	background: conic-gradient(hsl(360, 100%, 75%), hsl(320, 100%, 75%),hsl(280, 100%, 75%),hsl(240, 100%, 75%),hsl(200, 100%, 75%),hsl(160, 100%, 75%),hsl(120, 100%, 75%),hsl(80, 100%, 75%),hsl(40, 100%, 75%),hsl(0, 100%, 75%));
 	border-radius: 100%;
 	border: 1px solid var(--foreground);
 }
