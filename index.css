@@ -50,27 +50,33 @@ body {
 	background: var(--highlight);
 }
 
-.container { 
-	height: 100%;
+.timetable {
+	background-color: var(--foreground);
 	padding: 1px;
 	display: grid;
-	grid-template-columns: repeat(8, 1fr);
-	grid-template-rows: 1fr;
-	gap: 1px 1px;
-	background-color: var(--foreground);
-	grid-auto-flow: row;
-	grid-template-areas:
-		"times mon tue wed thu fri sat sun";
+	/* grid-template-rows: repeat(16, 1fr); */
+	grid-template-columns: 1fr;
+	gap: 1px 1px
 }
 
-#times { grid-area: times; }
-#mon { grid-area: mon; }
-#tue { grid-area: tue; }
-#wed { grid-area: wed; }
-#thu { grid-area: thu; }
-#fri { grid-area: fri; }
-#sat { grid-area: sat; }
-#sun { grid-area: sun; }
+.timecell { grid-area: cell0; }
+.mon { grid-area: cell1; }
+.tue { grid-area: cell2; }
+.wed { grid-area: cell3; }
+.thu { grid-area: cell4; }
+.fri { grid-area: cell5; }
+.sat { grid-area: cell6; }
+.sun { grid-area: cell7; }
+
+.row {
+	display: grid;
+	width: 100%;
+	grid-template-columns: 1fr;
+	grid-template-columns: repeat(8, 1fr);
+	gap: 1px 1px;
+	grid-template-areas: 
+		'cell0 cell1 cell2 cell3 cell4 cell5 cell6 cell7';
+}
 
 .cell {
 	background-color: var(--background-1);
@@ -99,49 +105,6 @@ body {
 	justify-content: left;
 	text-align: left;
 }
-
-.daycontainer {
-	height: 100%;
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat(16, 1fr);
-	gap: 1px 1px;
-	grid-auto-flow: row;
-	grid-template-areas:
-		"dayname"
-		"seven"
-		"eight"
-		"nine"
-		"ten"
-		"eleven"
-		"twelve"
-		"thirteen"
-		"fourteen"
-		"fifteen"
-		"sixteen"
-		"seventeen"
-		"eighteen"
-		"nineteen"
-		"twenty"
-		"twenty-one";
-}
-
-.dayname { grid-area: dayname; }
-.seven { grid-area: seven; }
-.eight { grid-area: eight; }
-.nine { grid-area: nine; }
-.ten { grid-area: ten; }
-.eleven { grid-area: eleven; }
-.twelve { grid-area: twelve; }
-.thirteen { grid-area: thirteen; }
-.fourteen { grid-area: fourteen; }
-.fifteen { grid-area: fifteen; }
-.sixteen { grid-area: sixteen; }
-.seventeen { grid-area: seventeen; }
-.eighteen { grid-area: eighteen; }
-.nineteen { grid-area: nineteen; }
-.twenty { grid-area: twenty; }
-.twenty-one { grid-area: twenty-one; }
 
 .colourbutton{
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 8px;

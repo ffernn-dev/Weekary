@@ -1,536 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="index.css">
-        <script>
-            var colourbuttonelements
-            var picker
+	<head>
+		<link rel="stylesheet" type="text/css" href="index.css">
+		<script src="scripts/main.js"></script>
+	</head>
+	<body>
+		<div id="colourpicker" class="colourpicker" style="display:none;">
+			<div class="colourpickerarrow"></div>
+			<div class="colourpickerinner">
+				<button class="colourpickerbutton" onclick="setColour(1)" style="background-color: var(--timetable-1);"></button>
+				<button class="colourpickerbutton" onclick="setColour(2)" style="background-color: var(--timetable-2);"></button>
+				<button class="colourpickerbutton" onclick="setColour(3)" style="background-color: var(--timetable-3);"></button>
+				<button class="colourpickerbutton" onclick="setColour(4)" style="background-color: var(--timetable-4);"></button>
+				<button class="colourpickerbutton" onclick="setColour(5)" style="background-color: var(--timetable-5);"></button>
+				<button class="colourpickerbutton" onclick="setColour(6)" style="background-color: var(--timetable-6);"></button>
+				<button class="colourpickerbutton" onclick="setColour(7)" style="background-color: var(--timetable-7);"></button>
+				<button class="colourpickerbutton" onclick="setColour(8)" style="background-color: var(--timetable-8);"></button>
+			</div>
+		</div>
 
-            function colourPick(e){
-                //e.target.innerHTML = "<div class=\"colourpicker\"><div class=\"colourpickerarrow\"></div>The</div>"
-                e.target.appendChild(picker)
-                picker.style = "display: flex;"
-            };
+		<div class="timetable" id="timetable">
+			<div class="row" id="row0">
+				<div class="cell timecell dayname"></div>
+				<div class="cell dayname mon"><div>Monday</div></div>
+				<div class="cell dayname tue"><div>Tuesday</div></div>
+				<div class="cell dayname wed"><div>Wednesday</div></div>
+				<div class="cell dayname thu"><div>Thursday</div></div>
+				<div class="cell dayname fri"><div>Friday</div></div>
+				<div class="cell dayname sat"><div>Saturday</div></div>
+				<div class="cell dayname sun"><div>Sunday</div></div>
+			</div>
 
-            function setColour(element, number){
-                element.closest('.cell').style = "background-color: var(--timetable-" + number + "-desat);";
-            }
-
-            window.onload= function(){
-                colourbuttonelements = document.getElementsByClassName("coloursquare");
-                picker = document.getElementById("colourpicker")
-                
-                for (var i = 0; i < colourbuttonelements.length; i++) {
-                    colourbuttonelements[i].addEventListener('click', function(e) {
-                        if(e.target.classList.contains("coloursquare")) {
-                            colourPick(e)
-                        }
-                    });
-                }
-
-                document.addEventListener("keypress", function(e) {
-                    if (e.keyCode === 13) {
-                        var cells = document.querySelectorAll("[contenteditable=true]")
-                        var currentindex = Array.prototype.indexOf.call(cells, e.target)
-
-                        if (currentindex != cells.length - 1){cells[currentindex + 1].focus()}
-                        else{cells[0].focus()}
-                        e.preventDefault()
-                    }
-                });
-            }
-        </script>
-    </head>
-    <body>
-        <div id="colourpicker" class="colourpicker" style="display:none;">
-            <div class="colourpickerarrow"></div>
-            <div class="colourpickerinner">
-                <button class="colourpickerbutton" onclick="setColour(this,1)" style="background-color: var(--timetable-1);"></button>
-                <button class="colourpickerbutton" onclick="setColour(this,2)" style="background-color: var(--timetable-2);"></button>
-                <button class="colourpickerbutton" onclick="setColour(this,3)" style="background-color: var(--timetable-3);"></button>
-                <button class="colourpickerbutton" onclick="setColour(this,4)" style="background-color: var(--timetable-4);"></button>
-                <button class="colourpickerbutton" onclick="setColour(this,5)" style="background-color: var(--timetable-5);"></button>
-                <button class="colourpickerbutton" onclick="setColour(this,6)" style="background-color: var(--timetable-6);"></button>
-                <button class="colourpickerbutton" onclick="setColour(this,7)" style="background-color: var(--timetable-7);"></button>
-                <button class="colourpickerbutton" onclick="setColour(this,8)" style="background-color: var(--timetable-8);"></button>
-            </div>
-        </div>
-        <div class="container">
-            <div id="times">
-                <div class="daycontainer">
-                    <div class="cell timecell dayname"><div></div></div>
-                    <div class="cell timecell seven"><div>07:00</div></div>
-                    <div class="cell timecell eight"><div>08:00</div></div>
-                    <div class="cell timecell nine"><div>09:00</div></div>
-                    <div class="cell timecell ten"><div>10:00</div></div>
-                    <div class="cell timecell eleven"><div>11:00</div></div>
-                    <div class="cell timecell twelve"><div>12:00</div></div>
-                    <div class="cell timecell thirteen"><div>13:00</div></div>
-                    <div class="cell timecell fourteen"><div>14:00</div></div>
-                    <div class="cell timecell fifteen"><div>15:00</div></div>
-                    <div class="cell timecell sixteen"><div>16:00</div></div>
-                    <div class="cell timecell seventeen"><div>17:00</div></div>
-                    <div class="cell timecell eighteen"><div>18:00</div></div>
-                    <div class="cell timecell nineteen"><div>19:00</div></div>
-                    <div class="cell timecell twenty"><div>20:00</div></div>
-                    <div class="cell timecell twenty-one"><div>21:00</div></div>
-                </div>
-            </div>
-            <div id="mon">
-                <div class="daycontainer">
-                    <div class="cell dayname"><div>Monday</div></div>
-                    <div class="cell seven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eight">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nine">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell ten">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eleven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twelve">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell thirteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fourteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fifteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell sixteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell seventeen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eighteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nineteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty-one">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                </div>
-            </div>
-            <div id="tue">
-                <div class="daycontainer">
-                    <div class="cell dayname"><div>Tuesday</div></div>
-                    <div class="cell seven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eight">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nine">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell ten">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eleven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twelve">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell thirteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fourteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fifteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell sixteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell seventeen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eighteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nineteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty-one">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                </div>
-            </div>
-            <div id="wed">
-                <div class="daycontainer">
-                    <div class="cell dayname"><div>Wednesday</div></div>
-                    <div class="cell seven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eight">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nine">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell ten">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eleven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twelve">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell thirteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fourteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fifteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell sixteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell seventeen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eighteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nineteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty-one">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                </div>
-            </div>
-            <div id="thu">
-                <div class="daycontainer">
-                    <div class="cell dayname"><div>Thursday</div></div>
-                    <div class="cell seven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eight">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nine">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell ten">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eleven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twelve">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell thirteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fourteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fifteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell sixteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell seventeen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eighteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nineteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty-one">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                </div>
-            </div>
-            <div id="fri">
-                <div class="daycontainer">
-                    <div class="cell dayname"><div>Friday</div></div>
-                    <div class="cell seven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eight">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nine">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell ten">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eleven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twelve">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell thirteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fourteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fifteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell sixteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell seventeen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eighteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nineteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty-one">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                </div>
-            </div>
-            <div id="sat">
-                <div class="daycontainer">
-                    <div class="cell dayname"><div>Saturday</div></div>
-                    <div class="cell seven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eight">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nine">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell ten">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eleven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twelve">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell thirteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fourteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fifteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell sixteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell seventeen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eighteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nineteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty-one">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                </div>
-            </div>
-            <div id="sun">
-                <div class="daycontainer">
-                    <div class="cell dayname"><div>Sunday</div></div>
-                    <div class="cell seven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eight">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nine">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell ten">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eleven">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twelve">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell thirteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fourteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell fifteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell sixteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell seventeen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell eighteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell nineteen">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                    <div class="cell twenty-one">
-                        <div class="textbox" contenteditable="true"></div>
-                        <div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
-                    </div>
-                </div>
-            </div>
-          </div>
-    </body>
+			<div class="row" id="row1">
+				<div class="cell timecell"><div>07:00</div></div>
+				<div class="cell mon">
+					<div class="textbox" contenteditable="true"></div>
+					<div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
+				</div>
+				<div class="cell tue">
+					<div class="textbox" contenteditable="true"></div>
+					<div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
+				</div>
+				<div class="cell wed">
+					<div class="textbox" contenteditable="true"></div>
+					<div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
+				</div>
+				<div class="cell thu">
+					<div class="textbox" contenteditable="true"></div>
+					<div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
+				</div>
+				<div class="cell fri">
+					<div class="textbox" contenteditable="true"></div>
+					<div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
+				</div>
+				<div class="cell sat">
+					<div class="textbox" contenteditable="true"></div>
+					<div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
+				</div>
+				<div class="cell sun">
+					<div class="textbox" contenteditable="true"></div>
+					<div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
