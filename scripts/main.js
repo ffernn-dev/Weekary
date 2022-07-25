@@ -54,7 +54,13 @@ function saveCurrentState() {
 
 
 window.onload = function(){
-	times = JSON.parse(localStorage.getItem("times"))
+	if(JSON.parse(localStorage.getItem("times"))) {
+		console.log("got from localstorage")
+		times = JSON.parse(localStorage.getItem("times"))
+	} else {
+		times = ["07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"]
+	}
+	console.log(times)
 	var data = JSON.parse(localStorage.getItem("content"))
 	var colours = JSON.parse(localStorage.getItem("colours"))
 
@@ -94,14 +100,14 @@ window.onload = function(){
 					<div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>`
 
 		var textboxes = row.getElementsByClassName("textbox")
-
-		for(var j=0; j < textboxes.length; j++){
-			textboxes[j].innerText = data[i][j]
-			if(colours[i][j]) {
-				textboxes[j].parentElement.style.backgroundColor = colours[i][j]
+		if(data) {
+			for(var j=0; j < textboxes.length; j++){
+				textboxes[j].innerText = data[i][j]
+				if(colours[i][j]) {
+					textboxes[j].parentElement.style.backgroundColor = colours[i][j]
+				}
 			}
 		}
-
 		timetable.appendChild(row)
 	}
 
