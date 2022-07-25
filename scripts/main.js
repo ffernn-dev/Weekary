@@ -15,23 +15,49 @@ function colourPick(e){ //to open the colour picker
 function setColour(number){ //sets the colour of the cell when button is pressed
 	var cell = picker.closest('.cell'); //find the nearest cell relative to the picker
 	if(cell){ //in case it's null (happens when the picker hasn't been opened yet)
-		cell.style = "background-color: var(--timetable-" + number + "-desat);"; //set the colour
-		console.log("background-color: var(--timetable-" + number + "-desat);")
+		if(number == 0){
+			cell.style = "background-color: var(--background-1);";
+		} else {
+			cell.style = "background-color: var(--timetable-" + number + "-desat);"; //set the colour
+		}
 	};
+	console.log("set colour")
+	saveCurrentState()
 };
 
 function saveCurrentState() {
+	statustext.innerText = "Saving..."
+
 	var content = []
+	var colours = []
+
 	localStorage.setItem("times", JSON.stringify(times));
-	for(i = 0; i < cells.length; i++) {
-		content.push(cells[i].innerText)
+	for(var i=0; i < times.length; i++) {
+		var row = document.getElementById("row" + (i + 1))
+		var textboxes = row.getElementsByClassName("textbox")
+		
+		var rowcontent = []
+		var rowcolours = []
+		for(var j=0; j < textboxes.length; j++){
+			rowcontent.push(textboxes[j].innerText)
+			rowcolours.push(textboxes[j].parentElement.style.backgroundColor)
+		}
+		content.push(rowcontent);
+		colours.push(rowcolours);
 	}
 	localStorage.setItem("content", JSON.stringify(content))
+	localStorage.setItem("colours", JSON.stringify(colours))
+	console.log("ran save")
+
 	statustext.innerText = "Saved!"
 }
 
 
 window.onload = function(){
+	times = JSON.parse(localStorage.getItem("times"))
+	var data = JSON.parse(localStorage.getItem("content"))
+	var colours = JSON.parse(localStorage.getItem("colours"))
+
 	var timetable = document.getElementById("timetable")
 
 	for (var i = 0; i < times.length; i++) {
@@ -66,6 +92,16 @@ window.onload = function(){
 				<div class="cell sun">
 					<div class="textbox" contenteditable="true"></div>
 					<div class="colourbutton" contenteditable="false"><div class="coloursquare"></div></div>`
+
+		var textboxes = row.getElementsByClassName("textbox")
+
+		for(var j=0; j < textboxes.length; j++){
+			textboxes[j].innerText = data[i][j]
+			if(colours[i][j]) {
+				textboxes[j].parentElement.style.backgroundColor = colours[i][j]
+			}
+		}
+
 		timetable.appendChild(row)
 	}
 
@@ -83,7 +119,7 @@ window.onload = function(){
 	};
 
 	document.addEventListener("keydown", function(e) {
-		if (e.fkey === "Enter") {
+		if (e.key === "Enter") {
 			var currentindex = Array.prototype.indexOf.call(cells, e.target); //index of the current cell in the cell array
 
 			if (currentindex != cells.length - 1){cells[currentindex + 1].focus()} //if the cell isn't the last one, move to the next cell
@@ -91,16 +127,18 @@ window.onload = function(){
 			e.preventDefault();
 		}
 		
-		var numberregex = /[12345678]/;
-		var letterregex = /^[roygbivp]$/;
-		var numbers = {r:1,o:2,y:3,g:4,b:5,i:6,v:7,p:8};
+		var numberregex = /[123456780]/;
+		var letterregex = /^[roygbivpc]$/;
+		var numbers = {r:1,o:2,y:3,g:4,b:5,i:6,v:7,p:8,c:0};
 
-		if(numberregex.test(e.key)){ //basically just testing for 1, 2, 3, 4, 5, 6, 7, 8, r, o, y, g, b, i, v, p as shortcuts for setting the colour
-			setColour(e.key);
-		};
-		if(letterregex.test(e.key)){
-			setColour(numbers[e.key]);
-		};
+		if(!e.altKey && !e.ctrlKey && !e.metaKey) {
+			if(numberregex.test(e.key)){ //basically just testing for 1, 2, 3, 4, 5, 6, 7, 8, r, o, y, g, b, i, v, p as shortcuts for setting the colour
+				setColour(e.key);
+			};
+			if(letterregex.test(e.key)){
+				setColour(numbers[e.key]);
+			};
+		}
 	});
 
 	for (var i = 0; i < cells.length; i++) {
@@ -109,7 +147,7 @@ window.onload = function(){
 			statustext.innerText = "Idle..."
 
 			savetimeout = setTimeout(function () {
-				statustext.innerText = "Saving..."
+				console.log("triggered save")
 				saveCurrentState()
 			}, 1000); 
 		});
